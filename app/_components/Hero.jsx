@@ -1,8 +1,14 @@
-import { Button } from '@/components/ui/button'
+"use client"
 import Image from 'next/image'
 import React from 'react'
+import Link from 'next/link'
+import { UserButton, useUser } from '@clerk/nextjs'
+
 
 function Hero() {
+
+    const { user, isSignedIn } = useUser();
+
   return (
     <section className="bg-gray-900 text-white">
   <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
@@ -20,13 +26,31 @@ function Hero() {
       </p>
 
       <div className="mt-8 flex flex-wrap justify-center gap-4">
-        <a
-          className="block w-full rounded border border-blue-600 bg-primary px-12 py-3 text-sm font-medium text-white hover:bg-primary/90 hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
-          href="#"
-        >
-          Get Started Now
-        </a>
+       
 
+
+      {isSignedIn ? (
+            <Link legacyBehavior href={'/dashboard'}>
+            <a
+               className="block w-full rounded border border-blue-600 bg-primary px-12 py-3 text-sm font-medium text-white hover:bg-primary/90 hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+               href="#"
+               >
+               Get Started Now
+           </a>
+      </Link>
+           
+        ) : (
+            <Link legacyBehavior href={'/sign-in'}>
+             <a
+                className="block w-full rounded border border-blue-600 bg-primary px-12 py-3 text-sm font-medium text-white hover:bg-primary/90 hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                href="#"
+                >
+                Get Started Now
+            </a>
+       </Link>
+            
+        )}
+        
       </div>
     </div>
   </div>
