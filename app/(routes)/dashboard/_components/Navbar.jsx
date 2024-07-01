@@ -5,6 +5,9 @@ import Image from 'next/image'
 
 
 function Navbar() {
+
+  // need to map redirect pages
+
   return (
     <div className='p-6 flex items-center justify-between bg-gray-900 text-white'>
 
