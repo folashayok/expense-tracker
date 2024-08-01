@@ -8,10 +8,9 @@ function Budgets() {
   // need to map list of budget cards
 
   return (
-    <div className="bg-gray-900 text-white">
+    <div className="bg-gable-green-700 text-white">
       <h2 className="font-bold text-3xl ml-10">My Budgets</h2>
       <BudgetList/>
-      <CreateBudget/>
     </div>
   );
 }
@@ -60,3 +59,4 @@ export default Budgets;
         //    </div>
          //   </section>
 */
+ 

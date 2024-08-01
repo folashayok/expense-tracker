@@ -13,7 +13,7 @@ function Navbar() {
 
 
   return (
-    <div className='p-6 flex items-center justify-between bg-gray-900 text-white'>
+    <div className='p-6 flex items-center justify-between bg-gable-green-700 text-white'>
 
       <section className='flex items-center'>
         <Image 

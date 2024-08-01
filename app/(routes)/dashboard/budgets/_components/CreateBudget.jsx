@@ -34,7 +34,7 @@ function CreateBudget() {
 
   return (
     <div className="p-10 grid grid-cols-4 gap-x-5 gap-y-5 items-center">
-        <Card className="bg-primary rounded-lg min-h-40 text-white">
+        <Card className=" bg-slate-800 rounded-lg min-h-40 text-white">
           <CardHeader className="text-center text-lg">Create new budget</CardHeader>
 
           <CardDescription>
