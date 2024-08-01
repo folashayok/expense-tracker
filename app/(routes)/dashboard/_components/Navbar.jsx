@@ -1,12 +1,16 @@
 import React from 'react'
 import { UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 
 
 function Navbar() {
 
   // need to map redirect pages
+
+  const router = useRouter();
+
 
   return (
     <div className='p-6 flex items-center justify-between bg-gray-900 text-white'>
@@ -20,8 +24,8 @@ function Navbar() {
       </section>
 
       <section className='flex items-center'>
-        <h3>Overview</h3>
-        <h3 className='mx-5'>Budgets</h3>
+        <button onClick={router.replace('/dashboard')}>Overview</button>
+        <button onClick={router.replace('/dashboard/budgets')} className='mx-5'>Budgets</button>
         <h3 className='mr-5'>Expenses</h3>
         <h3>Settings</h3>
       </section>
