@@ -23,24 +23,46 @@ import {
   
   import { Button } from "../../../../../components/ui/button";
   import { DialogClose } from "@radix-ui/react-dialog";
+  import { Budgets } from '@/utils/schema';
+import { useUser } from '@clerk/nextjs';
+import { toast } from 'sonner';
+import { db } from '@/utils/dbConfig'; 
 
 function CreateBudget() {
 
     const [amount, setAmount] = useState(); 
     const [name, setName] = useState(); 
-    const [onCreateBudget, setOnCreateBudget] = useState();
 
+    const {user}=useUser();
+
+    /**
+     * Used to create new budget
+     */
+
+    const onCreateBudget=async()=>{
+
+      const result=await db.insert(Budgets)
+      .values({
+        name:name,
+        amount:amount,
+        createdBy:user?.primaryEmailAddress?.emailAddress
+      }).returning({insertedId:Budgets.id})
+
+      if(result) {
+        toast('New Budget Created!')
+      }
+    }
 
 
   return (
     <div className="p-10 grid grid-cols-4 gap-x-5 gap-y-5 items-center">
-        <Card className=" bg-slate-800 rounded-lg min-h-40 text-white">
-          <CardHeader className="text-center text-lg">Create new budget</CardHeader>
+        <Card className=" bg-gable-green-500 rounded-md border-slate-600 min-h-52 text-white">
+          <CardHeader className="text-center text-lg">Create New Budget</CardHeader>
 
           <CardDescription>
             <Dialog>
-              <DialogTrigger asChild>
-                <Button>
+              <DialogTrigger>
+                <Button className="bg-transparent hover:bg-gable-green-300">
                     +
                 </Button>
               </DialogTrigger>
@@ -81,12 +103,18 @@ function CreateBudget() {
                         />
                     </section>     
 
-                    <Button 
-                    disabled={!(name&&amount)}
-                    className="rounded-lg bg-primary h-11 mt-5 text-xl text-white" 
-                    onClick={()=>onCreateBudget()}>
-                        Add
-                    </Button>          
+                    <DialogClose asChild>
+                      <Button 
+                      disabled={!(name&&amount)}
+                      className="rounded-lg bg-gable-green-500 hover:bg-gable-green-300 h-11 mt-5 text-xl text-white" 
+                      onClick={()=>onCreateBudget()}>
+                          Add
+                      </Button>   
+                    </DialogClose>
+                           
+
+                      {/* Try to implement adding new budget from database into BudgetList 1:51:24 */}
+
                 </div>   
 
                     {/*

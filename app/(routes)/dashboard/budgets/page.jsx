@@ -8,7 +8,7 @@ function Budgets() {
   // need to map list of budget cards
 
   return (
-    <div className="bg-gable-green-700 text-white">
+    <div className="bg-gable-green-700 text-white min-h-screen">
       <h2 className="font-bold text-3xl ml-10">My Budgets</h2>
       <BudgetList/>
     </div>

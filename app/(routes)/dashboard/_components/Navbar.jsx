@@ -18,7 +18,7 @@ function Navbar() {
       <section className='flex items-center'>
         <Image 
           src={'logo.svg'}
-          width={140}
+          width={160}
           height={100}
           />
       </section>
