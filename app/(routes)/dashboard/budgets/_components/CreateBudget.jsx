@@ -19,20 +19,21 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogClose
   } from "../../../../../@/components/ui/dialog";
   
-  import { Button } from "../../../../../components/ui/button";
-  import { DialogClose } from "@radix-ui/react-dialog";
-  import { Budgets } from '@/utils/schema';
+import { Button } from "../../../../../components/ui/button";
+import { Budgets } from '@/utils/schema';
 import { useUser } from '@clerk/nextjs';
 import { toast } from 'sonner';
 import { db } from '@/utils/dbConfig'; 
+import {listUserBudgets} from './BudgetList';
 
-function CreateBudget() {
+
+function CreateBudget({refreshData}) {
 
     const [amount, setAmount] = useState(); 
     const [name, setName] = useState(); 
-
     const {user}=useUser();
 
     /**
@@ -48,14 +49,17 @@ function CreateBudget() {
         createdBy:user?.primaryEmailAddress?.emailAddress
       }).returning({insertedId:Budgets.id})
 
+      
+
       if(result) {
+        refreshData()
         toast('New Budget Created!')
       }
     }
 
 
   return (
-    <div className="p-10 grid grid-cols-4 gap-x-5 gap-y-5 items-center">
+    <div>
         <Card className=" bg-gable-green-500 rounded-md border-slate-600 min-h-52 text-white">
           <CardHeader className="text-center text-lg">Create New Budget</CardHeader>
 
