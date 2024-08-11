@@ -1,87 +1,105 @@
-import React from 'react'
+import React from "react";
 
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-  } from "../../../../../@/components/ui/card";
-  
-  import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogClose
-  } from "../../../../../@/components/ui/dialog";
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../../../../../@/components/ui/card";
 
-  import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "../../../../../@/components/ui/dialog";
 
-function BudgetItem({budget}) {
+import { Button } from "@/components/ui/button";
+
+function BudgetItem({ budget }) {
   return (
     <div>
-        <Card className="bg-gable-green-500 rounded-md border-slate-600 min-h-52 text-white"> 
-            <CardHeader className="text-center text-lg">{budget.name}</CardHeader>
-        
-            <CardDescription>
+      <Card className="bg-gable-green-500 rounded-md border-slate-600 min-h-52 text-white">
+        <CardHeader className="text-center text-lg">{budget.name}</CardHeader>
 
-            <div className='mt-5 px-2 w-full'>
-                <div className='flex flex-row justify-between'>
-                    <h2 className='text-xs'>${budget.totalSpend?budget.totalSpend:0} Spent</h2>
-                    <h2 className='text-xs'>${budget.amount-budget.totalSpend} Remaining</h2>
-                </div>
-                <div className='w-full bg-slate-300 h-3 rounded-full'>
-                    <div className='w-[40%] bg-blue-400 h-3 rounded-full'>
-
-                    </div>
-                </div>
+        <CardDescription>
+          <div className="mt-5 px-2 w-full">
+            <div className="flex flex-row justify-between">
+              <h2 className="text-xs">
+                ${budget.totalSpend ? budget.totalSpend : 0} Spent
+              </h2>
+              <h2 className="text-xs">
+                ${budget.amount - budget.totalSpend} Remaining
+              </h2>
             </div>
+            <div className="w-full bg-slate-300 h-3 rounded-full">
+              <div className="w-[40%] bg-blue-400 h-3 rounded-full"></div>
+            </div>
+          </div>
 
-            <Dialog>
-              <DialogTrigger className='self-center w-full flex pt-5'>
-                        <Button className="bg-transparent hover:bg-gable-green-300">
-                            Details
-                        </Button>
-              </DialogTrigger>
+          <Dialog>
+            <DialogTrigger className="self-center w-full flex pt-5">
+              <Button className="w-full bg-transparent hover:bg-gable-green-400">
+                Details
+              </Button>
+            </DialogTrigger>
 
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle className="text-2xl m-2 flex flex-row justify-between align-baseline">
-                    <h1>{budget.name}</h1>
-                    <h1>${budget.amount}</h1>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle className="text-2xl m-2 flex flex-row justify-between align-baseline">
+                  <h1>{budget.name}</h1>
+                  <h1>${budget.amount}</h1>
                 </DialogTitle>
-                  
-                </DialogHeader>
+              </DialogHeader>
 
-                <div className='self-center w-full m-2'>
-                    <h1 className='flex flex-row justify-center'> {budget.totalItem} Items </h1>
+              <div className="self-center w-full">
+                <h1 className="flex w-full justify-center">
+                  {budget.totalItem} Items{" "}
+                </h1>
+              </div>
+
+
+              <div className="px-2 w-full">
+                <div className="flex flex-row justify-between">
+                  <h2 className="text-xs">
+                    ${budget.totalSpend ? budget.totalSpend : 0} Spent
+                  </h2>
+                  <h2 className="text-xs">
+                    ${budget.amount - budget.totalSpend} Remaining
+                  </h2>
                 </div>
-
-                <div className='px-2 w-full'>
-                <div className='flex flex-row justify-between'>
-                    <h2 className='text-xs'>${budget.totalSpend?budget.totalSpend:0} Spent</h2>
-                    <h2 className='text-xs'>${budget.amount-budget.totalSpend} Remaining</h2>
+                <div className="w-full bg-slate-300 h-3 rounded-full">
+                  <div className="w-[40%] bg-blue-400 h-3 rounded-full"></div>
                 </div>
-                <div className='w-full bg-slate-300 h-3 rounded-full'>
-                    <div className='w-[40%] bg-blue-400 h-3 rounded-full'>
+              </div>
 
-                    </div>
+              <div>
+                <h1>Recent Expenses</h1>
+                <div className="bg-slate-200">
+                    <h1>Test - $3200</h1>
+                    <h1>Test - $3200</h1>
+                    <h1>Test - $3200</h1>
+                    <h1>Test - $3200</h1>
                 </div>
-            </div>
+              </div>
 
-              </DialogContent>
-            </Dialog>
-
-            
-          </CardDescription>
-        </Card>
+              <div className="flex flex-row justify-center ">
+                <Button className="m-2">Add Expense</Button>
+                <Button className="m-2">Edit Budget</Button>
+                <Button className="m-2 bg-red-600 hover:bg-red-800">Delete Budget</Button>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </CardDescription>
+      </Card>
     </div>
-  )
+  );
 }
 
-export default BudgetItem
+export default BudgetItem;

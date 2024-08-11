@@ -11,7 +11,6 @@ function Navbar() {
 
   const router = useRouter();
 
-
   return (
     <div className='p-6 flex items-center justify-between bg-gable-green-700 text-white'>
 
@@ -24,9 +23,9 @@ function Navbar() {
       </section>
 
       <section className='flex items-center'>
-        <button onClick={router.replace('/dashboard')}>Overview</button>
-        <button onClick={router.replace('/dashboard/budgets')} className='mx-5'>Budgets</button>
-        <h3 className='mr-5'>Expenses</h3>
+        <button onClick={()=>(router.push('/dashboard'))}>Overview</button>
+        <button onClick={()=>(router.push('/dashboard/budgets'))} className='mx-5'>Budgets</button>
+        <button onClick={()=>(router.push('/dashboard/expenses'))} className='mr-5'>Expenses</button>
         <h3>Settings</h3>
       </section>
 

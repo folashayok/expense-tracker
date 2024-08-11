@@ -1,11 +1,12 @@
 import React from 'react'
+import ExpenseList from './_components/ExpenseList'
 
-function Dashboard() {
+function Expenses() {
   return (
     <div className="bg-gable-green-700 text-white min-h-screen">
-      <h1 className='text-3xl'>Dashboard</h1>
+        <ExpenseList/>
     </div>
   )
 }
 
-export default Dashboard
+export default Expenses

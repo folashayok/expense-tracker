@@ -49,7 +49,11 @@ function CreateBudget({refreshData}) {
         createdBy:user?.primaryEmailAddress?.emailAddress
       }).returning({insertedId:Budgets.id})
 
-      
+
+      /**
+       * Check for if there are two budgets with the same name, if so, then give error 
+       */
+
 
       if(result) {
         refreshData()
@@ -116,16 +120,7 @@ function CreateBudget({refreshData}) {
                       </Button>   
                     </DialogClose>
                            
-
-                      {/* Try to implement adding new budget from database into BudgetList 1:51:24 */}
-
                 </div>   
-
-                    {/*
-                    <DialogFooter>
-                        <button type="submit">Add</button>
-                    </DialogFooter>
-                    */}
 
               </DialogContent>
             </Dialog>
