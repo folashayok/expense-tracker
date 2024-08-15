@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import CreateBudget, {refresg} from './CreateBudget'
+import CreateBudget from './CreateBudget'
 import { db } from '@/utils/dbConfig';
 import { Budgets, Expenses } from '@/utils/schema';
 import { useUser } from '@clerk/nextjs';
@@ -34,10 +34,11 @@ import BudgetItem from './BudgetItem';
 function BudgetList() {
 
   const [budgetList, setBudgetList] = useState([])
+  const [allExpenseList, setAllExpenseList] = useState([])
   const {user} = useUser();
 
   useEffect(()=>{
-    user&&getBudgetList();
+    user&&getBothList();
   }, [user])
   /**
    * used to get budget list
@@ -57,14 +58,30 @@ function BudgetList() {
       setBudgetList(result)
     }
 
+    const getExpenseList=async()=> {
+      
+      const result = await db.select({
+        ...getTableColumns(Expenses),
+      }).from(Budgets, Expenses)
+      .leftJoin(Expenses, eq(Budgets.id, Expenses.budgetId))
+      .where(eq(Budgets.id, Expenses.budgetId))
+
+      setAllExpenseList(result)
+    }
+
+    const getBothList = async() => {
+      getExpenseList()
+      getBudgetList()
+    }
+
 
   return (
     <div className="p-10 grid grid-cols-4 gap-x-5 gap-y-5 items-center">
       <CreateBudget 
-        refreshData={()=>getBudgetList()}
+        refreshData={()=>getBothList()}
       />
       {budgetList?.length>0? budgetList.map((budget, index) => (
-            <BudgetItem budget={budget}/>
+            <BudgetItem refreshData={()=>getBothList()} budget={budget} expense={allExpenseList}/>
       ))
     : [1, 2, 3, 4, 5, 6, 7].map((item, index) => (
       <div key={index} className='w-full bg-gable-green-400 rounded-lg h-[13rem] animate-pulse'>
@@ -72,7 +89,6 @@ function BudgetList() {
       </div>
     ))
     }
-        <button>Clear all</button>
     </div>
   )
 }

@@ -42,10 +42,10 @@ function CreateExpense({refreshData}) {
 
   const { user } = useUser();
   const [budgetNames, setBudgetNames] = useState([]);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState((new Date()));
   const [amount, setAmount] = useState(); 
   const [name, setName] = useState(); 
-  const [budget, setBudget] = useState(); 
+  const [budget, setBudget] = useState([]); 
   const [id, setId] = useState();
 
   useEffect(() => {
@@ -63,8 +63,7 @@ function CreateExpense({refreshData}) {
     const names = result.map((item) => item.name);
     setBudgetNames(names);
 
-    const IDs = result.map((item) => item.id);
-    setId(IDs)
+    setBudget(result.map((item) => item))
   };
 
   const onCreateExpense = async() => {
@@ -73,22 +72,23 @@ function CreateExpense({refreshData}) {
     .values({
       name:name,
       amount:amount,
-      budgetId:parseInt(id),
+      budgetId:id,
       createdAt:date,
     })
 
     if(result) {
       refreshData()
-      toast('New Budget Created!')
+      toast('New Expense Created!')
     }
   }
+
 
   return (
     <div>
       <Dialog>
         <DialogTrigger>
           <Button
-            className="bg-transparent hover:bg-gable-green-300"
+            className="bg-gable-green-400 hover:bg-gable-green-300"
             onClick={() => fillSelectList()}
           >
             Create New Expense
@@ -151,16 +151,16 @@ function CreateExpense({refreshData}) {
             </section>
 
             <section className="mt-2">
-              <Select>
+              <Select onValueChange={(value)=>setId(value)}>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select a budget" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup>
+                  <SelectGroup >
                     <SelectLabel>Budgets</SelectLabel>
-                    {budgetNames.map((name, index) => (
-                      <SelectItem value={name} key={index} onChange={(e) =>setBudget(e.target.value)}>
-                        {name}
+                    {budget.map((item, index) => (
+                      <SelectItem key={item.index} value={item.id}>
+                        {item.name}
                       </SelectItem>
                     ))}
                   </SelectGroup>
@@ -170,7 +170,7 @@ function CreateExpense({refreshData}) {
 
             <DialogClose asChild>
               <Button
-                //  disabled={!(name&&amount)}
+                disabled={!(name&&amount)}
                 className="rounded-lg bg-gable-green-500 hover:bg-gable-green-300 h-11 my-5 text-xl text-white"
                 onClick={()=>onCreateExpense()}
               >

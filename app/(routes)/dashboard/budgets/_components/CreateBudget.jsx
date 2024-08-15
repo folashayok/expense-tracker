@@ -51,9 +51,10 @@ function CreateBudget({refreshData}) {
 
 
       /**
-       * Check for if there are two budgets with the same name, if so, then give error 
+       * Check for if there are two budgets with the same name, if so, then give error
        */
 
+      
 
       if(result) {
         refreshData()
