@@ -5,6 +5,8 @@
 
 A web application designed to help users track and manage their finances. This app allows users to authenticate securely, add expenses, view expense history, and categorize their financial activities.
 
+NOTE: This project is a continuous work in process
+
 ## Table of Contents
 
 - [Features](#features)
